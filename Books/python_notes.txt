@@ -1,0 +1,4 @@
+1. Copy List 
+list1 = list2[:]  # Using splicing
+
+2. Sort List 

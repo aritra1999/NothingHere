@@ -1,0 +1,103 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long int 
+#define ld long double
+#define TAB << "\t" << 
+
+#define us unordered_set
+#define um unordered_map
+
+#define vi vector<int> 
+#define vll vector<ll> 
+#define vs vector<string> 
+#define vp  vector < pair<int, int> > 
+
+#define pb push_back
+#define all(n) n.begin(),n.end()
+#define mem(a,b) memset(a,b,sizeof(a))
+#define MOD 1000000007
+const double PI=3.14159265358979323846264338327950288419716939937510582097494459230;
+#define MAXSIZE 26 
+
+void solve(){
+    int n,c; cin >> n >> c; 
+    vi ans(n); 
+    bool check = true;
+
+    for(int i=0;i<n;i++)ans[i] = i+1;
+    
+    if(c == n - 1){
+        for(int x:ans)cout << x << " ";
+        return;    
+    }else if(c == (n-1)*2){
+        reverse(all(ans));
+        for(int x:ans)cout << x << " ";
+        return;
+    }else if(c < n-1 || c > (n*(n+1))/2){
+        cout << "IMPOSSIBLE";return;
+    }else if(c == (n*(n+1))/2 - 1){
+
+        for(int i=0;i<n/2;i++){
+            ans[i] = (i+1)*2;     
+        }
+        int k = n-1;
+        for(int i=n/2;i<=n;i++){
+            ans[i] = k;
+            k -= 2;
+        }
+
+    }else{
+        if(c <= (n-1)*2){
+            int start = n - c + 2;
+            int end = n-1;
+
+            while(start < end){
+                swap(ans[start], ans[end]);
+                start++;
+                end--;
+            }
+        }else{
+            reverse(all(ans));
+
+            int start = 0;
+            int end = c - n - 2;
+
+            while(start < end){
+                swap(ans[start], ans[end]);
+                start++;
+                end--;
+            }
+        }
+    }
+    
+    for(int x:ans)cout << x << " ";
+}
+
+int main(){
+    std::ios_base::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
+    cout << fixed;
+
+    #ifdef INPUT  
+        freopen("c.in","r",stdin);
+        clock_t time_req; 
+        cout << endl;
+    #endif 
+
+    int test_case; 
+    cin >> test_case;
+    for(int temp_test=1;temp_test<=test_case;temp_test++){
+        cout << "Case #" << temp_test << ": ";
+        solve();
+        cout << endl;
+    }
+
+    #ifdef INPUT    
+        cout << endl << endl;
+        time_req = clock();
+        cout << "Processor time taken : " << (float)time_req/CLOCKS_PER_SEC << " seconds" << endl << endl; 
+    #endif
+
+    return 0;
+}
